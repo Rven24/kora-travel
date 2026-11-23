@@ -1,4 +1,10 @@
-import { HeroContent, SiteConfig, TripPackage } from '@/types';
+import {
+  FaqItem,
+  HeroContent,
+  ServiceTier,
+  SiteConfig,
+  TripPackage,
+} from '@/types';
 
 export const siteConfig: SiteConfig = {
   brandName: 'KORA',
@@ -167,5 +173,46 @@ export const tripPackages: TripPackage[] = [
           'Unstructured reading and rest day culminating in dark-sky astronomy with a resident astronomer.',
       },
     ],
+  },
+];
+
+export const serviceTierConfig: Record<
+  ServiceTier,
+  { label: string; multiplier: number; description: string }
+> = {
+  standard: {
+    label: 'Standard Private',
+    multiplier: 1,
+    description:
+      'Boutique lodges, private ground transfers, and lead specialist guide.',
+  },
+  'private-luxury': {
+    label: 'Private Luxury',
+    multiplier: 1.65,
+    description:
+      'Exclusive residence buyouts, rotary-wing transfers, and dedicated field chef.',
+  },
+};
+
+export const faqItems: FaqItem[] = [
+  {
+    question: 'What is your cancellation and rescheduling policy?',
+    answer:
+      'Full refunds are issued for cancellations made at least 60 days prior to departure. Within 60 days, 100% of your deposit may be transferred without penalty to any future expedition within 18 months.',
+  },
+  {
+    question: 'Which travel documents and permits are required?',
+    answer:
+      'A passport valid for at least six months beyond your return date is mandatory. Our concierge desk secures all restricted-area park permits, aviation clearances, and regional visas on your behalf.',
+  },
+  {
+    question: 'What expedition gear is provided versus personal?',
+    answer:
+      'We supply technical outer shells, cold-weather sleep systems, satellite communicators, and safety hardware. You will receive a tailored packing dossier 45 days before departure covering personal layers and footwear.',
+  },
+  {
+    question: 'Can dietary restrictions and medical needs be accommodated?',
+    answer:
+      'Yes. Prior to departure, our field nutritionist and medical officer review every guest profile to customize trail rations, lodge menus, and altitude or allergy protocols.',
   },
 ];

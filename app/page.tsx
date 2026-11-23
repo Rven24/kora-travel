@@ -1,6 +1,8 @@
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ItineraryPreview from '@/components/ItineraryPreview';
+import CostEstimator from '@/components/CostEstimator';
+import FaqAccordion from '@/components/FaqAccordion';
 import Footer from '@/components/Footer';
 
 export default function HomePage() {
@@ -10,6 +12,8 @@ export default function HomePage() {
       <main className="flex-1">
         <HeroSection />
         <ItineraryPreview />
+        <CostEstimator />
+        <FaqAccordion />
       </main>
       <Footer />
     </div>
