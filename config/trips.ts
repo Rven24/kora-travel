@@ -216,3 +216,5 @@ export const faqItems: FaqItem[] = [
       'Yes. Prior to departure, our field nutritionist and medical officer review every guest profile to customize trail rations, lodge menus, and altitude or allergy protocols.',
   },
 ];
+
+export const additionalGuestMultiplier = 0.75;

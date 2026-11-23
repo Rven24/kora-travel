@@ -2,7 +2,11 @@
 
 import { useState } from 'react';
 import { ArrowDownRight } from 'lucide-react';
-import { serviceTierConfig, tripPackages } from '@/config/trips';
+import {
+  additionalGuestMultiplier,
+  serviceTierConfig,
+  tripPackages,
+} from '@/config/trips';
 import {
   CostEstimateSelection,
   ServiceTier,
@@ -35,7 +39,15 @@ export default function CostEstimator({ onApplyEstimate }: CostEstimatorProps) {
   const dailyRateWithTier = Math.round(
     selectedPackage.baseDailyRate * tierInfo.multiplier
   );
-  const estimatedTotal = dailyRateWithTier * days * travelers;
+
+  const fullRateTotal = dailyRateWithTier * days * travelers;
+  const effectiveGuestUnits =
+    1 + (travelers - 1) * additionalGuestMultiplier;
+  const estimatedTotal = Math.round(
+    dailyRateWithTier * days * effectiveGuestUnits
+  );
+  const groupSavings = fullRateTotal - estimatedTotal;
+  const discountPercentage = Math.round((1 - additionalGuestMultiplier) * 100);
 
   const handleLockEstimate = () => {
     if (onApplyEstimate) {
@@ -122,7 +134,7 @@ export default function CostEstimator({ onApplyEstimate }: CostEstimatorProps) {
                 />
                 <div className="mt-2 flex justify-between font-mono text-[10px] text-neutral-400 tabular-nums">
                   <span>1 GUEST</span>
-                  <span>6 GUESTS MAX</span>
+                  <span>{discountPercentage}% OFF GUESTS 2+</span>
                 </div>
               </div>
 
@@ -212,7 +224,7 @@ export default function CostEstimator({ onApplyEstimate }: CostEstimatorProps) {
                   ${estimatedTotal.toLocaleString('en-US')}
                 </p>
                 <p className="mt-2 font-mono text-xs text-neutral-400 tabular-nums">
-                  ${dailyRateWithTier.toLocaleString('en-US')} / guest / day
+                  ${dailyRateWithTier.toLocaleString('en-US')} lead rate / day
                 </p>
               </div>
 
@@ -232,6 +244,16 @@ export default function CostEstimator({ onApplyEstimate }: CostEstimatorProps) {
                   <dd className="font-mono text-white tabular-nums">
                     {travelers} {travelers === 1 ? 'Guest' : 'Guests'} × {days}{' '}
                     Days
+                  </dd>
+                </div>
+                <div className="flex justify-between border-b border-neutral-800/80 pb-2.5">
+                  <dt className="font-mono text-neutral-400 uppercase">
+                    SHARED SAVINGS
+                  </dt>
+                  <dd className="font-mono text-white tabular-nums">
+                    {groupSavings > 0
+                      ? `-$${groupSavings.toLocaleString('en-US')} (${discountPercentage}% off 2+)`
+                      : 'Solo Rate'}
                   </dd>
                 </div>
               </dl>
