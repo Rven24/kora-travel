@@ -5,6 +5,36 @@ export type TripCategory =
 
 export type ServiceTier = 'standard' | 'private-luxury';
 
+export interface NavLinkItem {
+  label: string;
+  href: string;
+}
+
+export interface SiteConfig {
+  brandName: string;
+  tagline: string;
+  contactEmail: string;
+  location: string;
+  navLinks: NavLinkItem[];
+}
+
+export interface HeroContent {
+  eyebrow: string;
+  headline: string;
+  subheadline: string;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  imageSrc: string;
+  imageAlt: string;
+  imageCaption: string;
+  highlights: {
+    label: string;
+    value: string;
+  }[];
+}
+
 export interface ItineraryDay {
   day: number;
   title: string;
@@ -50,6 +80,8 @@ export interface InquiryPayload {
   full_name: string;
   email: string;
   package_type: string;
+  days_count: number;
+  service_tier: ServiceTier;
   travelers_count: number;
   estimated_total: number;
 }
